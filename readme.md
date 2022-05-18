@@ -14,6 +14,8 @@
 - Parcel Bundler
 - dotenv
 - NPM (Node Package Manager)
+- Open Weather API (Weather Data)
+- Unsplash (Image Data)
 
 ## Author:
 
