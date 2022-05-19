@@ -169,6 +169,7 @@ select {
 
 .weatherContainer {
   padding: 1rem;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -206,7 +207,7 @@ select {
 
 @media only screen and (min-width: 1920px) {
   .header-container {
-    height: 25vh;
+    height: 40vh;
     background-image: url("http://source.unsplash.com/2560x1440/?landscape");
     background-repeat: no-repeat;
     background-size: cover;
