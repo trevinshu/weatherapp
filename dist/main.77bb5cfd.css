@@ -77,7 +77,7 @@ select {
 }
 
 .header-container {
-  height: 50vh;
+  height: 25vh;
   background-image: url("http://source.unsplash.com/1920x1080/?landscape");
   background-repeat: no-repeat;
   background-size: cover;
@@ -95,6 +95,25 @@ select {
   padding: 0.5rem;
   background-color: #fff;
   border: 1px solid black;
+  margin-block: 0.3rem;
+}
+.form-section .form-container .codeBtn {
+  width: 100%;
+  background-color: #6ef8ce;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  padding: 0.5rem 1rem;
+  letter-spacing: 3px;
+  border-radius: 5px;
+  margin-bottom: 0.3rem;
+}
+.form-section .form-container .codeBtn i {
+  margin-right: 0.5rem;
+}
+.form-section .form-container .codeBtn:hover {
+  background-color: #0df3ae;
+  transition: all ease-in 0.2s;
 }
 .form-section .form-container .searchBtn {
   display: inline-block;
@@ -113,6 +132,26 @@ select {
   background-color: black;
   color: #fff;
   transition: all ease-in 0.2s;
+}
+
+.weatherContainer {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.weatherContainer h1 {
+  border-bottom: 5px solid #000;
+  margin-bottom: 1rem;
+  letter-spacing: 3px;
+}
+.weatherContainer p {
+  font-size: 1.2rem;
+  padding-block: 0.3rem;
+  letter-spacing: 3px;
+}
+.weatherContainer p:first-of-type {
+  text-transform: capitalize;
 }
 
 /*# sourceMappingURL=/main.77bb5cfd.css.map */

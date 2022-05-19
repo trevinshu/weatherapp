@@ -9,6 +9,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <header>
@@ -16,12 +23,14 @@
     </header>
     <main>
       <div class="form-section" id="form-section">
-        <form action="" id="form-container" class="form-container">
+        <form action="" id="formContainer" class="form-container">
           <input class="cityInput" id="cityInput" type="text" placeholder="Enter City" />
-          <input class="provinceInput" id="provinceInput" type="text" placeholder="Enter Province, State or Country" />
-          <button class="searchBtn" id="searchBtn">Search</button>
+          <input class="provinceInput" id="provinceInput" type="text" placeholder="Enter Country Code" />
+          <a href="https://countrycode.org/" target="_blank" class="codeBtn"><i class="fa-solid fa-info"></i> Find Your Country Code.</a>
+          <button class="searchBtn" id="searchBtn">Search <i class="fa-solid fa-chevron-right"></i><i class="fa-solid fa-chevron-right"></i></button>
         </form>
       </div>
+      <div class="weatherContainer" id="weatherContainer"></div>
     </main>
 
     <script src="./js/script.js" type="module"></script>
