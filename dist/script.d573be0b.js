@@ -1572,7 +1572,21 @@ function searchWeather(e) {
   headerContainer.style.backgroundImage = "url('http://source.unsplash.com/1920x1080/?" + cityInput + ',' + provinceInput + "')";
 
   try {
-    getWeather(cityInput, provinceInput);
+    if (cityInput === '') {
+      headerContainer.style.backgroundImage = "url('http://source.unsplash.com/1920x1080/?landscape')";
+      var html = document.getElementById('weatherContainer');
+      html.innerHTML = "";
+      resultContainer('cityMsg', '<i class="fa-solid fa-triangle-exclamation"></i>', 'Enter A City');
+    } else if (provinceInput === '') {
+      headerContainer.style.backgroundImage = "url('http://source.unsplash.com/1920x1080/?landscape')";
+
+      var _html = document.getElementById('weatherContainer');
+
+      _html.innerHTML = "";
+      resultContainer('countryMsg', '<i class="fa-solid fa-triangle-exclamation"></i>', 'Enter A Country Code');
+    } else {
+      getWeather(cityInput, provinceInput);
+    }
   } catch (error) {
     console.log(error);
   }
@@ -1587,38 +1601,68 @@ function getWeather(_x, _x2) {
 
 function _getWeather() {
   _getWeather = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(city, province) {
-    var apiKey, response, data, windSpeed, html, weatherContainer;
+    var apiKey, response, data, windSpeed, html, currentDate, headerContainer, _html2;
+
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             apiKey = "d659a3f9c76dc5e55bbb2aa1b1a7b7f9";
-            _context.next = 3;
+            _context.prev = 1;
+            _context.next = 4;
             return fetch("https://api.openweathermap.org/data/2.5/weather?q=".concat(city, ",").concat(province, "&appid=").concat(apiKey, "&units=metric"));
 
-          case 3:
+          case 4:
             response = _context.sent;
-            _context.next = 6;
+            _context.next = 7;
             return response.json();
 
-          case 6:
+          case 7:
             data = _context.sent;
             windSpeed = Math.round(data.wind.speed * 18 / 5);
             html = document.getElementById('weatherContainer');
+            currentDate = new Date().toDateString();
             html.innerHTML = '';
-            html.innerHTML = "\n    <img src=\"http://openweathermap.org/img/wn/".concat(data.weather[0].icon, "@2x.png\"/>\n    <h1>").concat(data.name, " ").concat(Math.round(data.main.temp), "\xB0C</h1>\n    <p>").concat(data.weather[0].description, "</p>\n    <p>Feels Like: ").concat(Math.round(data.main.feels_like), "\xB0C</p>\n    <p>Max Temp: ").concat(Math.round(data.main.temp_max), "\xB0C</p>\n    <p>Min Temp: ").concat(Math.round(data.main.temp_min), "\xB0C</p>\n    <p>Wind Speed: ").concat(windSpeed, " km/h</p>\n    <p>Humidity: ").concat(data.main.humidity, "%</p>\n  ");
-            weatherContainer = document.getElementById('weatherContainer');
-            weatherContainer.appendChild(html);
+            html.innerHTML = "\n    <img src=\"http://openweathermap.org/img/wn/".concat(data.weather[0].icon, "@2x.png\"/>\n    <h1>").concat(data.name, " ").concat(Math.round(data.main.temp), "\xB0C</h1>\n    <p>").concat(currentDate, "</p>\n    <p>").concat(data.weather[0].description, "</p>\n    <p>Feels Like: ").concat(Math.round(data.main.feels_like), "\xB0C</p>\n    <p>Max Temp: ").concat(Math.round(data.main.temp_max), "\xB0C</p>\n    <p>Min Temp: ").concat(Math.round(data.main.temp_min), "\xB0C</p>\n    <p>Wind Speed: ").concat(windSpeed, " km/h</p>\n    <p>Humidity: ").concat(data.main.humidity, "%</p>\n  ");
+            resultContainer('successMsg', '<i class="fa-solid fa-circle-check"></i>', 'Weather Results');
+            _context.next = 23;
+            break;
 
-          case 13:
+          case 16:
+            _context.prev = 16;
+            _context.t0 = _context["catch"](1);
+            headerContainer = document.getElementById('headerContainer');
+            headerContainer.style.backgroundImage = "url('http://source.unsplash.com/1920x1080/?landscape')";
+            _html2 = document.getElementById('weatherContainer');
+            _html2.innerHTML = "";
+            resultContainer('noDataMsg', '<i class="fa-solid fa-triangle-exclamation"></i>', 'No Data For The Entered Search Query.');
+
+          case 23:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee);
+    }, _callee, null, [[1, 16]]);
   }));
   return _getWeather.apply(this, arguments);
 }
+
+function resultContainer(className, icon, message) {
+  var msgContainer = document.getElementById('msgContainer');
+  msgContainer.innerHTML = "\n    <p class='alert ".concat(className, "'>").concat(icon, " ").concat(message, "</p>\n  ");
+  setTimeout(function () {
+    var alert = document.querySelector('.alert');
+    alert.remove();
+  }, 5000);
+}
+
+function footerText() {
+  var footer = document.getElementById('footerContainer');
+  var date = new Date().getFullYear();
+  footer.innerHTML = "\n  <p>Designed & Developed by Trevin Shu &copy; ".concat(date, "</p>\n  ");
+}
+
+footerText();
 },{"dotenv":"../node_modules/dotenv/lib/main.js","regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
