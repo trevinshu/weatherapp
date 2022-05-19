@@ -106,9 +106,7 @@
 }
 
 .weatherContainer {
-  height: 50vh;
   padding: 1rem;
-  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -135,6 +133,7 @@
 }
 
 .footerContainer {
+  margin-top: 2rem;
   background-color: #000;
   color: #fff;
   text-align: center;
