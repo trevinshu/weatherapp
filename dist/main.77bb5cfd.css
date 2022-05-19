@@ -204,4 +204,14 @@ select {
   letter-spacing: 3px;
 }
 
+@media only screen and (min-width: 1920px) {
+  .header-container {
+    height: 25vh;
+    background-image: url("http://source.unsplash.com/2560x1440/?landscape");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
 /*# sourceMappingURL=/main.77bb5cfd.css.map */
