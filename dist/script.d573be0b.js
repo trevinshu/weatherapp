@@ -1597,7 +1597,8 @@ function searchWeather(e) {
 
 function getWeather(_x, _x2) {
   return _getWeather.apply(this, arguments);
-}
+} //Notification for Search Result
+
 
 function _getWeather() {
   _getWeather = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(city, province) {
@@ -1691,7 +1692,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57476" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61631" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

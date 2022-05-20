@@ -37,7 +37,7 @@ function searchWeather(e) {
 
 //Get Weather From API Function
 async function getWeather(city, province) {
-  const apiKey = process.env.MY_API_KEY;
+  const apiKey = process.env.MY_WEATHER_KEY;
 
   try {
     let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${province}&appid=${apiKey}&units=metric`);
@@ -70,6 +70,7 @@ async function getWeather(city, province) {
   }
 }
 
+//Notification for Search Result
 function resultContainer(className, icon, message) {
   let msgContainer = document.getElementById('msgContainer');
 
