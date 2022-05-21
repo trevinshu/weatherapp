@@ -4,7 +4,13 @@
 
 - Weather App built with SCSS and Vanilla JavaScript that fetches the weather based on the input of an user.
 
+## Screenshot
+
+![](src/img/screenshot-rocks.png?raw=true)
+
 ## View Live:
+
+- https://trevins-weather-app.netlify.app/
 
 ## Tools/Packages Used:
 
