@@ -1602,7 +1602,7 @@ function getWeather(_x, _x2) {
 
 function _getWeather() {
   _getWeather = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(city, province) {
-    var apiKey, response, data, windSpeed, html, currentDate, headerContainer, _html2;
+    var apiKey, switchUnits, response, data, windSpeed, html, currentDate, toggleBtn, headerContainer, _html2;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -1610,27 +1610,80 @@ function _getWeather() {
           case 0:
             apiKey = "d659a3f9c76dc5e55bbb2aa1b1a7b7f9";
             _context.prev = 1;
-            _context.next = 4;
+
+            switchUnits = function switchUnits(e) {
+              e.preventDefault();
+
+              if (toggleBtn.textContent === '°C') {
+                toggleBtn.innerHTML = '°F';
+                var currentTemp = Math.round(data.main.temp * (9 / 5) + 32);
+                var feelsLike = Math.round(data.main.feels_like * (9 / 5) + 32);
+                var maxTemp = Math.round(data.main.temp_max * (9 / 5) + 32);
+                var minTemp = Math.round(data.main.temp_min * (9 / 5) + 32);
+
+                var _windSpeed = Math.round(data.wind.speed * 18 / 5 / 1.609344);
+
+                var mainTemp = document.getElementById('mainTemp');
+                mainTemp.innerHTML = "".concat(data.name, " ").concat(currentTemp, "\xB0F");
+                var feTemp = document.getElementById('feelsLike');
+                feTemp.innerHTML = "Feels Like: ".concat(feelsLike, "\xB0F");
+                var maTemp = document.getElementById('maxTemp');
+                maTemp.innerHTML = "Max Temp: ".concat(maxTemp, "\xB0F");
+                var miTemp = document.getElementById('minTemp');
+                miTemp.innerHTML = "Min Temp: ".concat(minTemp, "\xB0F");
+                var wiSpeed = document.getElementById('windSpeed');
+                wiSpeed.innerHTML = "Wind Speed: ".concat(_windSpeed, " mph");
+              } else {
+                toggleBtn.innerHTML = '°C';
+
+                var _mainTemp = document.getElementById('mainTemp');
+
+                _mainTemp.innerHTML = "".concat(data.name, " ").concat(Math.round(data.main.temp), "\xB0C");
+
+                var _feTemp = document.getElementById('feelsLike');
+
+                _feTemp.innerHTML = "Feels Like: ".concat(Math.round(data.main.feels_like), "\xB0C");
+
+                var _maTemp = document.getElementById('maxTemp');
+
+                _maTemp.innerHTML = "Max Temp: ".concat(Math.round(data.main.temp_max), "\xB0C");
+
+                var _miTemp = document.getElementById('minTemp');
+
+                _miTemp.innerHTML = "Min Temp: ".concat(Math.round(data.main.temp_min), "\xB0C");
+
+                var _wiSpeed = document.getElementById('windSpeed');
+
+                var _windSpeed2 = Math.round(data.wind.speed * 18 / 5);
+
+                _wiSpeed.innerHTML = "Wind Speed: ".concat(_windSpeed2, " km/h");
+              }
+            };
+
+            _context.next = 5;
             return fetch("https://api.openweathermap.org/data/2.5/weather?q=".concat(city, ",").concat(province, "&appid=").concat(apiKey, "&units=metric"));
 
-          case 4:
+          case 5:
             response = _context.sent;
-            _context.next = 7;
+            _context.next = 8;
             return response.json();
 
-          case 7:
+          case 8:
             data = _context.sent;
             windSpeed = Math.round(data.wind.speed * 18 / 5);
             html = document.getElementById('weatherContainer');
             currentDate = new Date().toDateString();
             html.innerHTML = '';
-            html.innerHTML = "\n    <img src=\"http://openweathermap.org/img/wn/".concat(data.weather[0].icon, "@2x.png\"/>\n    <h1>").concat(data.name, " ").concat(Math.round(data.main.temp), "\xB0C</h1>\n    <p>").concat(currentDate, "</p>\n    <p>").concat(data.weather[0].description, "</p>\n    <p>Feels Like: ").concat(Math.round(data.main.feels_like), "\xB0C</p>\n    <p>Max Temp: ").concat(Math.round(data.main.temp_max), "\xB0C</p>\n    <p>Min Temp: ").concat(Math.round(data.main.temp_min), "\xB0C</p>\n    <p>Wind Speed: ").concat(windSpeed, " km/h</p>\n    <p>Humidity: ").concat(data.main.humidity, "%</p>\n  ");
-            resultContainer('successMsg', '<i class="fa-solid fa-circle-check"></i>', 'Weather Results');
-            _context.next = 23;
+            html.innerHTML = "\n    <button id=\"toggleBtn\" class=\"toggleBtn\">\xB0C</button>\n    <img src=\"http://openweathermap.org/img/wn/".concat(data.weather[0].icon, "@2x.png\"/>\n    <h1 id=\"mainTemp\">").concat(data.name, " ").concat(Math.round(data.main.temp), "\xB0C</h1>\n    <p>").concat(currentDate, "</p>\n    <p>").concat(data.weather[0].description, "</p>\n    <p id=\"feelsLike\">Feels Like: ").concat(Math.round(data.main.feels_like), "\xB0C</p>\n    <p id=\"maxTemp\">Max Temp: ").concat(Math.round(data.main.temp_max), "\xB0C</p>\n    <p id=\"minTemp\">Min Temp: ").concat(Math.round(data.main.temp_min), "\xB0C</p>\n    <p id=\"windSpeed\">Wind Speed: ").concat(windSpeed, " km/h</p>\n    <p>Humidity: ").concat(data.main.humidity, "%</p>\n  ");
+            resultContainer('successMsg', '<i class="fa-solid fa-circle-check"></i>', 'Weather Results'); //Toggle between Celsius & Fahrenheit
+
+            toggleBtn = document.getElementById('toggleBtn');
+            toggleBtn.addEventListener('click', switchUnits);
+            _context.next = 26;
             break;
 
-          case 16:
-            _context.prev = 16;
+          case 19:
+            _context.prev = 19;
             _context.t0 = _context["catch"](1);
             headerContainer = document.getElementById('headerContainer');
             headerContainer.style.backgroundImage = "url('http://source.unsplash.com/1920x1080/?landscape')";
@@ -1638,12 +1691,12 @@ function _getWeather() {
             _html2.innerHTML = "";
             resultContainer('noDataMsg', '<i class="fa-solid fa-triangle-exclamation"></i>', 'No Data For The Entered Search Query.');
 
-          case 23:
+          case 26:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[1, 16]]);
+    }, _callee, null, [[1, 19]]);
   }));
   return _getWeather.apply(this, arguments);
 }
@@ -1692,7 +1745,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55592" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52029" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -50,17 +50,68 @@ async function getWeather(city, province) {
 
     html.innerHTML = '';
     html.innerHTML = `
+    <button id="toggleBtn" class="toggleBtn">°C</button>
     <img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png"/>
-    <h1>${data.name} ${Math.round(data.main.temp)}°C</h1>
+    <h1 id="mainTemp">${data.name} ${Math.round(data.main.temp)}°C</h1>
     <p>${currentDate}</p>
     <p>${data.weather[0].description}</p>
-    <p>Feels Like: ${Math.round(data.main.feels_like)}°C</p>
-    <p>Max Temp: ${Math.round(data.main.temp_max)}°C</p>
-    <p>Min Temp: ${Math.round(data.main.temp_min)}°C</p>
-    <p>Wind Speed: ${windSpeed} km/h</p>
+    <p id="feelsLike">Feels Like: ${Math.round(data.main.feels_like)}°C</p>
+    <p id="maxTemp">Max Temp: ${Math.round(data.main.temp_max)}°C</p>
+    <p id="minTemp">Min Temp: ${Math.round(data.main.temp_min)}°C</p>
+    <p id="windSpeed">Wind Speed: ${windSpeed} km/h</p>
     <p>Humidity: ${data.main.humidity}%</p>
   `;
     resultContainer('successMsg', '<i class="fa-solid fa-circle-check"></i>', 'Weather Results');
+
+    //Toggle between Celsius & Fahrenheit
+    const toggleBtn = document.getElementById('toggleBtn');
+    toggleBtn.addEventListener('click', switchUnits);
+
+    function switchUnits(e) {
+      e.preventDefault();
+      if (toggleBtn.textContent === '°C') {
+        toggleBtn.innerHTML = '°F';
+
+        let currentTemp = Math.round(data.main.temp * (9 / 5) + 32);
+        let feelsLike = Math.round(data.main.feels_like * (9 / 5) + 32);
+        let maxTemp = Math.round(data.main.temp_max * (9 / 5) + 32);
+        let minTemp = Math.round(data.main.temp_min * (9 / 5) + 32);
+        let windSpeed = Math.round((data.wind.speed * 18) / 5 / 1.609344);
+
+        let mainTemp = document.getElementById('mainTemp');
+        mainTemp.innerHTML = `${data.name} ${currentTemp}°F`;
+
+        let feTemp = document.getElementById('feelsLike');
+        feTemp.innerHTML = `Feels Like: ${feelsLike}°F`;
+
+        let maTemp = document.getElementById('maxTemp');
+        maTemp.innerHTML = `Max Temp: ${maxTemp}°F`;
+
+        let miTemp = document.getElementById('minTemp');
+        miTemp.innerHTML = `Min Temp: ${minTemp}°F`;
+
+        let wiSpeed = document.getElementById('windSpeed');
+        wiSpeed.innerHTML = `Wind Speed: ${windSpeed} mph`;
+      } else {
+        toggleBtn.innerHTML = '°C';
+
+        let mainTemp = document.getElementById('mainTemp');
+        mainTemp.innerHTML = `${data.name} ${Math.round(data.main.temp)}°C`;
+
+        let feTemp = document.getElementById('feelsLike');
+        feTemp.innerHTML = `Feels Like: ${Math.round(data.main.feels_like)}°C`;
+
+        let maTemp = document.getElementById('maxTemp');
+        maTemp.innerHTML = `Max Temp: ${Math.round(data.main.temp_max)}°C`;
+
+        let miTemp = document.getElementById('minTemp');
+        miTemp.innerHTML = `Min Temp: ${Math.round(data.main.temp_min)}°C`;
+
+        let wiSpeed = document.getElementById('windSpeed');
+        let windSpeed = Math.round((data.wind.speed * 18) / 5);
+        wiSpeed.innerHTML = `Wind Speed: ${windSpeed} km/h`;
+      }
+    }
   } catch {
     const headerContainer = document.getElementById('headerContainer');
     headerContainer.style.backgroundImage = "url('http://source.unsplash.com/1920x1080/?landscape')";

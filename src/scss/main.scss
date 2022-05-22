@@ -112,6 +112,18 @@
   align-items: center;
   flex-direction: column;
 
+  .toggleBtn {
+    background-color: #000;
+    color: #fff;
+    padding: 0.5rem 2rem;
+    border-radius: 0.5rem;
+  }
+
+  .toggleBtn:active {
+    background-color: #fff;
+    color: #000;
+  }
+
   h1 {
     border-bottom: 5px solid #000;
     margin-bottom: 1rem;
@@ -143,6 +155,46 @@
   bottom: 0;
   p {
     letter-spacing: 3px;
+  }
+}
+
+@media only screen and (min-width: 850px) {
+  .form-section {
+    .form-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      input {
+        width: 50%;
+      }
+
+      .codeMsg {
+        width: 50%;
+      }
+
+      .searchBtn {
+        width: 50%;
+      }
+    }
+    .msgContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .successMsg {
+        width: 50%;
+      }
+
+      .cityMsg,
+      .countryMsg,
+      .noDataMsg {
+        width: 50%;
+      }
+    }
+  }
+
+  .weatherContainer {
+    margin-bottom: 5rem;
   }
 }
 
