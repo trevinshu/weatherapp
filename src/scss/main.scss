@@ -200,10 +200,9 @@
 
 @media only screen and (min-width: 1920px) {
   .header-container {
-    height: 40vh;
-    background-image: url('http://source.unsplash.com/2560x1440/?landscape');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
+    height: 35vh;
   }
+}
+
+@media only screen and (min-width: 2560px) {
 }
